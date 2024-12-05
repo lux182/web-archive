@@ -63,7 +63,12 @@ function EditTagDialog({ afterSubmit, open, setOpen, editTag }: EditTagProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogTitle>Edit Tag</DialogTitle>
-        <Input value={tagName} onChange={e => setTagName(e.target.value)} placeholder="Tag Name" />
+        <Input
+          value={tagName}
+          onChange={e => setTagName(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && handleSubmit()}
+          placeholder="Tag Name"
+        />
         <Button onClick={handleSubmit}>Update</Button>
       </DialogContent>
     </Dialog>

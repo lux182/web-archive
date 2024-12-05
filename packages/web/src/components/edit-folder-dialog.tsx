@@ -57,7 +57,12 @@ function EditFolderDialog({ afterSubmit, open, setOpen, editFolder }: EditFolder
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogTitle>Edit Folder</DialogTitle>
-        <Input value={folderName} onChange={e => setFolderName(e.target.value)} placeholder="Folder Name" />
+        <Input
+          value={folderName}
+          onChange={e => setFolderName(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && handleSubmit()}
+          placeholder="Folder Name"
+        />
         <Button onClick={handleSubmit}>Update</Button>
       </DialogContent>
     </Dialog>

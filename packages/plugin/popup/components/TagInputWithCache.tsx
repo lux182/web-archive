@@ -3,7 +3,7 @@ import type { AutoCompleteTagInputRef } from '@web-archive/shared/components/aut
 import AutoCompleteTagInput from '@web-archive/shared/components/auto-complete-tag-input'
 import { Button } from '@web-archive/shared/components/button'
 import type { GenerateTagProps } from '@web-archive/shared/utils'
-import { generateTagByOpenAI, isNil } from '@web-archive/shared/utils'
+import { generateTagByOpenAI } from '@web-archive/shared/utils'
 import { useRequest } from 'ahooks'
 import { AlertCircleIcon, Loader2Icon, SparklesIcon } from 'lucide-react'
 import { sendMessage } from 'webext-bridge/popup'

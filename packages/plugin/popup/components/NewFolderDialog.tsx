@@ -49,7 +49,12 @@ function NewFolderDialog({ afterSubmit, open, setOpen }: NewFolderProps) {
       <DialogContent className="w-64">
         <DialogTitle>Create New Folder</DialogTitle>
         <DialogDescription></DialogDescription>
-        <Input value={name} onChange={e => setName(e.target.value)} placeholder="Folder Name" />
+        <Input
+          value={name}
+          onChange={e => setName(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && handleSubmit()}
+          placeholder="Folder Name"
+        />
         <Button onClick={handleSubmit}>Create</Button>
       </DialogContent>
     </Dialog>
