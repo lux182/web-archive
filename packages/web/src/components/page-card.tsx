@@ -7,7 +7,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@web-a
 import { ExternalLink, Eye, EyeOff, SquarePen, Trash } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import { Badge } from '@web-archive/shared/components/badge'
+import { BadgeSpan } from '@web-archive/shared/components/badge'
 import { TooltipPortal } from '@radix-ui/react-tooltip'
 import ScreenshotView from './screenshot-view'
 import { updatePageShowcase } from '~/data/page'
@@ -18,7 +18,7 @@ function Comp({ page, onPageDelete }: { page: Page, onPageDelete?: (page: Page) 
   const { tagCache, refreshTagCache } = useContext(TagContext)
   const bindTags = tagCache?.filter(tag => tag.pageIds.includes(page.id)) ?? []
   const tagBadgeList = bindTags.map((tag) => {
-    return (<Badge key={tag.id} variant="outline" className="select-none">{tag.name}</Badge>)
+    return (<BadgeSpan key={tag.id} variant="outline" className="select-none">{tag.name}</BadgeSpan>)
   })
 
   const location = useLocation()
