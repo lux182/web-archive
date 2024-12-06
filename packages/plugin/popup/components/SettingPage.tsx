@@ -1,8 +1,10 @@
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, CircleHelp } from 'lucide-react'
 import { useState } from 'react'
 import { Checkbox } from '@web-archive/shared/components/checkbox'
 import { Label } from '@web-archive/shared/components/label'
 import { Input } from '@web-archive/shared/components/input'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@web-archive/shared/components/tooltip'
+import { TooltipPortal } from '@radix-ui/react-tooltip'
 import { getSingleFileSetting, setSingleFileSetting } from '../utils/singleFile'
 import type { PageType } from '~/popup/PopupPage'
 import type { SingleFileSetting } from '~/utils/singleFile'
@@ -43,7 +45,7 @@ function SingleFileSettings() {
   }
 
   return (
-    <div>
+    <div className="w-full">
       <div className="text-lg font-semibold mb-3">Single File Settings</div>
       <div className="flex flex-col space-y-3">
         <SettingCheckBox
@@ -155,6 +157,14 @@ function SingleFileSettings() {
             }}
           />
         </div>
+        <SettingCheckBox
+          id="groupDuplicateStylesheets"
+          checked={settings.groupDuplicateStylesheets ?? false}
+          onCheckedChange={checked => handleChange(checked, 'groupDuplicateStylesheets')}
+          label="Group Duplicate Stylesheets"
+          helpText="Enable this option to group duplicate stylesheets. It will reduce the size of the output file. If you want to save the website on Reddit, you should enable this option."
+        >
+        </SettingCheckBox>
       </div>
     </div>
   )
@@ -165,9 +175,10 @@ interface SettingCheckBoxProps {
   onCheckedChange: (checked: boolean) => void
   label: string
   id: string
+  helpText?: string
 }
 
-function SettingCheckBox({ checked, onCheckedChange, label, id }: SettingCheckBoxProps) {
+function SettingCheckBox({ checked, onCheckedChange, label, id, helpText }: SettingCheckBoxProps) {
   function handleChange(checked: boolean | string) {
     if (typeof checked === 'string') {
       return
@@ -176,7 +187,7 @@ function SettingCheckBox({ checked, onCheckedChange, label, id }: SettingCheckBo
   }
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2 w-full">
       <Checkbox
         id={id}
         checked={checked}
@@ -189,6 +200,21 @@ function SettingCheckBox({ checked, onCheckedChange, label, id }: SettingCheckBo
       >
         {label}
       </Label>
+      {helpText
+      && (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <CircleHelp size={14}></CircleHelp>
+            </TooltipTrigger>
+            <TooltipPortal>
+              <TooltipContent className="max-w-64">
+                {helpText}
+              </TooltipContent>
+            </TooltipPortal>
+          </Tooltip>
+        </TooltipProvider>
+      )}
     </div>
   )
 }

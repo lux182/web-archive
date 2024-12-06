@@ -1,27 +1,8 @@
-import { isNil } from '@web-archive/shared/utils'
-import type { SingleFileSetting } from '~/utils/singleFile'
+import { type SingleFileSetting, mergeDefaultSingleFileSetting } from '~/utils/singleFile'
 
 export function getSingleFileSetting() {
   const setting = localStorage.getItem('single-file-setting')
-  if (isNil(setting)) {
-    return {
-      removeHiddenElements: true,
-      removeUnusedStyles: true,
-      removeUnusedFonts: true,
-      removeImports: true,
-      blockScripts: true,
-      blockAudios: true,
-      blockVideos: true,
-      compressHTML: true,
-      removeAlternativeFonts: true,
-      removeAlternativeMedias: true,
-      removeAlternativeImages: true,
-      groupDuplicateImages: true,
-      loadDeferredImagesMaxIdleTime: 1500,
-      loadDeferredImages: true,
-    }
-  }
-  return JSON.parse(setting) as SingleFileSetting
+  return mergeDefaultSingleFileSetting(setting ? JSON.parse(setting) : undefined)
 }
 
 export function setSingleFileSetting(setting: SingleFileSetting) {
