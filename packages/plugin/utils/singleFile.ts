@@ -35,6 +35,7 @@ export interface SingleFileSetting {
   removeAlternativeImages: boolean
   groupDuplicateImages: boolean
   loadDeferredImages?: boolean
+  groupDuplicateStylesheets?: boolean
   loadDeferredImagesMaxIdleTime?: number
   onprogress?: (data: ProgressData) => void
 }
@@ -49,9 +50,8 @@ declare const extension: {
   }>
 }
 
-export async function getCurrentPageData(singleFileSetting?: SingleFileSetting) {
-  const href = window.location.href
-  const { content, title, filename } = await extension.getPageData({
+export function mergeDefaultSingleFileSetting(singleFileSetting?: SingleFileSetting) {
+  return {
     removeHiddenElements: true,
     removeUnusedStyles: true,
     removeUnusedFonts: true,
@@ -65,9 +65,17 @@ export async function getCurrentPageData(singleFileSetting?: SingleFileSetting) 
     removeAlternativeImages: true,
     groupDuplicateImages: true,
     loadDeferredImages: true,
+    groupDuplicateStylesheets: false,
     loadDeferredImagesMaxIdleTime: 1500,
     ...(singleFileSetting ?? {}),
-  })
+  }
+}
+
+export async function getCurrentPageData(singleFileSetting?: SingleFileSetting) {
+  const href = window.location.href
+  const { content, title, filename } = await extension.getPageData(
+    mergeDefaultSingleFileSetting(singleFileSetting),
+  )
 
   const descriptionList = document.getElementsByName('description')
   const pageDesc = descriptionList?.[0]?.getAttribute('content') ?? ''
