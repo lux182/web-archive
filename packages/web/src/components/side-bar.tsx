@@ -2,12 +2,12 @@ import { HomeIcon, LogOut, Settings, SquareLibrary, Trash2 } from 'lucide-react'
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@web-archive/shared/components/side-bar'
 import { useEffect, useState } from 'react'
 import { isNumberString } from '@web-archive/shared/utils'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { ScrollArea } from '@web-archive/shared/components/scroll-area'
 import SettingDialog from './setting-dialog'
 import SidebarFolderMenu from './side-bar-folder-menu'
 import SidebarTagMenu from './side-bar-tag-menu'
-import { useNavigate, useParams } from '~/router'
+import { Link, useNavigate, useParams } from '~/router'
 
 interface SidebarProps {
   selectedTag: number | null

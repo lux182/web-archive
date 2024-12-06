@@ -9,12 +9,11 @@ import { useState } from 'react'
 import type { Folder as FolderType } from '@web-archive/shared/types'
 import { useRequest } from 'ahooks'
 import toast from 'react-hot-toast'
-import { Link } from 'react-router-dom'
 import NewFolderDialog from './new-folder-dialog'
 import EditFolderDialog from './edit-folder-dialog'
 import { deleteFolder, getAllFolder } from '~/data/folder'
 import emitter from '~/utils/emitter'
-import { useNavigate } from '~/router'
+import { Link, useNavigate } from '~/router'
 
 function getNextFolderId(folders: Array<FolderType>, index: number) {
   if (index === 0 && folders.length === 1) {
@@ -104,7 +103,7 @@ function SidebarFolderMenu({ openedFolder, setOpenedFolder, className }: Sidebar
               : (
                   folders?.map(folder => (
                     <SidebarMenuItem key={folder.id}>
-                      <Link to={`/folder/${folder.id}`}>
+                      <Link to="/folder/:slug" params={{ slug: folder.id.toString() }}>
                         <SidebarMenuButton>
                           <Folder
                             name={folder.name}
