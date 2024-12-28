@@ -87,5 +87,13 @@
   "are-you-sure-you-want-to-delete-this-folder": "Are you sure you want to delete this folder?",
   "folder-deleted-successfully": "Folder deleted successfully",
   "failed-to-delete-folder": "Failed to delete folder",
-  "loading-more": "Loading more..."
+  "loading-more": "Loading more...",
+  "testing": "testing",
+  "model-name-is-required": "Model name is required",
+  "please-enter-a-valid-api-url": "Please enter a valid API URL",
+  "api-key-is-required": "API Key is required",
+  "ai-tag-config-saved": "AI Tag config saved",
+  "select-service-type": "Select Service Type",
+  "select-generate-tag-language": "Select Generate Tag Language",
+  "model": "Model"
 }

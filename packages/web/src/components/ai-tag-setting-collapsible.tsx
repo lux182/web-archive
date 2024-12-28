@@ -25,16 +25,16 @@ function AITagSettingCollapsible() {
     z.object({
       type: z.literal('cloudflare'),
       tagLanguage: z.enum(['en', 'zh']),
-      model: z.string().min(1, { message: 'Model name is required' }),
+      model: z.string().min(1, { message: t('model-name-is-required') }),
       preferredTags: z.array(z.string()),
     }),
     z.object({
       type: z.literal('openai'),
       tagLanguage: z.enum(['en', 'zh']),
-      model: z.string().min(1, { message: 'Model name is required' }),
+      model: z.string().min(1, { message: t('model-name-is-required') }),
       preferredTags: z.array(z.string()),
-      apiUrl: z.string().url({ message: 'Please enter a valid API URL' }),
-      apiKey: z.string().min(1, { message: 'API Key is required' }),
+      apiUrl: z.string().url({ message: t('please-enter-a-valid-api-url') }),
+      apiKey: z.string().min(1, { message: t('api-key-is-required') }),
     }),
   ])
 
@@ -62,7 +62,7 @@ function AITagSettingCollapsible() {
   const { run: setAITagConfigRun, loading: saveConfigLoading } = useRequest(setAITagConfig, {
     manual: true,
     onSuccess: () => {
-      toast.success('AI Tag config saved')
+      toast.success(t('ai-tag-config-saved'))
     },
     onError: (error) => {
       toast.error(error.message)
@@ -113,7 +113,7 @@ function AITagSettingCollapsible() {
                     <FormControl>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select Service Type"></SelectValue>
+                          <SelectValue placeholder={t('select-service-type')}></SelectValue>
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="cloudflare">Cloudflare</SelectItem>
@@ -143,11 +143,11 @@ function AITagSettingCollapsible() {
                     <FormControl>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select Generate Tag Language"></SelectValue>
+                          <SelectValue placeholder={t('select-generate-tag-language')}></SelectValue>
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="en">English</SelectItem>
-                          <SelectItem value="zh">Chinese</SelectItem>
+                          <SelectItem value="zh">简体中文</SelectItem>
                         </SelectContent>
                       </Select>
                     </FormControl>
@@ -195,7 +195,7 @@ function AITagSettingCollapsible() {
                 name="model"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Model</FormLabel>
+                    <FormLabel>{t('model')}</FormLabel>
                     <FormControl>
                       <Input
                         placeholder={form.watch('type') === 'cloudflare'
